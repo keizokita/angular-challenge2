@@ -1,0 +1,70 @@
+<div class="card mt-3">
+  <div class="card-header">
+    <div class="float-left">
+      <h4>Lista de Cadastros</h4>
+    </div>
+    <div class="float-end">
+      <button type="button" class="btn btn-danger" [routerLink]="['']">
+        Logout
+      </button>
+    </div>
+    <div class="float-none">
+      <a
+        type="button"
+        class="btn btn-primary"
+        [routerLink]="['/products-list/new']"
+      >
+        Cadastrar Usuário
+      </a>
+    </div>
+  </div>
+  <div id="AlertPlaceholder" class="card-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Nome</th>
+          <th scope="col">Email</th>
+          <th scope="col">Gênero</th>
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          
+        >
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #deleteModal>
+  <div class="modal-body text-center">
+    <p>Tem certeza que deseja remover esse produto?</p>
+    <button
+      type="button"
+      class="btn btn-default"
+    >
+      Sim
+    </button>
+    <button type="button" class="btn btn-primary">
+      Não
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #vendaModal>
+  <div class="modal-body text-center" #product>
+    <p>Tem certeza que deseja vender esse produto?</p>
+    <button type="button" class="btn btn-default">
+      Sim
+    </button>
+    <button type="button" class="btn btn-primary">
+      Não
+    </button>
+  </div>
+</ng-template>

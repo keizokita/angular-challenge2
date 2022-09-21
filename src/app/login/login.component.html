@@ -1,0 +1,64 @@
+<link
+  href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+  rel="stylesheet"
+  id="bootstrap-css"
+/>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+    <!-- Login Form -->
+    <form needs-validation>
+      <input
+        type="text"
+        id="email"
+        class="fadeIn second form-control"
+        name="email"
+        placeholder="email"
+        required
+        formControlName="email"
+        #email
+        aria-describedby="inputGroupPrepend"
+      />
+      <div
+        *ngIf="form.get('email')?.errors?.['required'] && form.get('email')?.touched "
+        class="invalid-feedback d-block"
+      >
+        Email Obrigatório!
+      </div>
+      <div
+        *ngIf="form.get('email')?.errors && form.get('email')?.touched"
+        class="invalid-feedback d-block"
+      >
+        Email Inválido!
+      </div>
+      <input
+        type="text"
+        id="password"
+        class="fadeIn third form-control"
+        name="login"
+        placeholder="password"
+        required
+        formControlName="password"
+        #password
+      />
+      <div
+        *ngIf="form.get('password')?.errors?.['required'] && form.get('password')?.touched "
+        class="invalid-feedback d-block"
+      >
+        Senha Inválida!
+      </div>
+      <div
+        *ngIf="form.get('password')?.errors && form.get('password')?.touched"
+        class="invalid-feedback d-block"
+      >
+        A senha deve conter no mínimo 6 caracteres!
+      </div>
+      <input type="submit" class="fadeIn fourth" value="Log In" id="onSubmit" [disabled]="!form.valid" />
+    </form>
+  </div>
+</div>
