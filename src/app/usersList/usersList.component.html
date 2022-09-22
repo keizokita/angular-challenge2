@@ -12,7 +12,7 @@
       <a
         type="button"
         class="btn btn-primary"
-        [routerLink]="['/products-list/new']"
+        [routerLink]="['/users/create']"
       >
         Cadastrar Usuário
       </a>
@@ -30,12 +30,12 @@
       </thead>
       <tbody>
         <tr
-          
+          *ngFor="let user of users"
         >
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.gender }}</td>
+          <td>{{ user.status }}</td>
         </tr>
       </tbody>
     </table>
