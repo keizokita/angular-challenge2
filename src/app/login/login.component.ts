@@ -11,22 +11,22 @@ import { AuthService } from './auth.service';
 export class LoginComponent implements OnInit {
   usersPassword: Users = new Users();
 
-  form!: FormGroup;
+  formLogin!: FormGroup;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    // this.form = this.fb.group({
-    //   email: ['', [Validators.required, Validators.email]],
-    //   password: [
-    //     '',
-    //     [
-    //       Validators.required,
-    //       Validators.minLength(5),
-    //       Validators.maxLength(20),
-    //     ],
-    //   ],
-    // });
+    this.formLogin = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(6),
+          Validators.maxLength(20),
+        ],
+      ],
+    });
   }
 
   onSubmit() {

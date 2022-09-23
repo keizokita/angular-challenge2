@@ -12,7 +12,8 @@
     <!-- Tabs Titles -->
 
     <!-- Login Form -->
-    <form needs-validation>
+    <form needs-validation [formGroup]="formLogin" (ngSubmit)="onSubmit()">
+      <h1>Sign In</h1>
       <input
         type="text"
         id="email"
@@ -25,19 +26,19 @@
         aria-describedby="inputGroupPrepend"
       />
       <div
-        *ngIf="form.get('email')?.errors?.['required'] && form.get('email')?.touched "
+        *ngIf="formLogin.get('email')?.errors?.['required'] && formLogin.get('email')?.touched "
         class="invalid-feedback d-block"
       >
         Email Obrigatório!
       </div>
       <div
-        *ngIf="form.get('email')?.errors && form.get('email')?.touched"
+        *ngIf="formLogin.get('email')?.errors && formLogin.get('email')?.touched"
         class="invalid-feedback d-block"
       >
         Email Inválido!
       </div>
       <input
-        type="text"
+        type="password"
         id="password"
         class="fadeIn third form-control"
         name="login"
@@ -47,18 +48,18 @@
         #password
       />
       <div
-        *ngIf="form.get('password')?.errors?.['required'] && form.get('password')?.touched "
+        *ngIf="formLogin.get('password')?.errors?.['required'] && formLogin.get('password')?.touched "
         class="invalid-feedback d-block"
       >
         Senha Inválida!
       </div>
       <div
-        *ngIf="form.get('password')?.errors && form.get('password')?.touched"
+        *ngIf="formLogin.get('password')?.errors && formLogin.get('password')?.touched"
         class="invalid-feedback d-block"
       >
         A senha deve conter no mínimo 6 caracteres!
       </div>
-      <input type="submit" class="fadeIn fourth" value="Log In" id="onSubmit" [disabled]="!form.valid" />
+      <button type="submit" class="btn btn-info" id="onSubmit" [disabled]="!formLogin.valid" >Log In</button>
     </form>
   </div>
 </div>
