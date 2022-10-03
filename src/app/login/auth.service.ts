@@ -14,28 +14,33 @@ export class AuthService {
   private userAuthenticated: boolean = false;
 
   showMenuEmitter = new EventEmitter<boolean>();
-  delProduct: any;
 
-  constructor(private router: Router, private http: HttpClient, private toastr: ToastrService) {}
+  constructor(
+    private router: Router,
+    private http: HttpClient,
+    private toastr: ToastrService
+  ) {}
 
   validEmail(email: any) {
-    return this.http.get<User>(`${this.API}/?${email}`);
+    return this.http.get<User>(`${this.API}?email=${email}`);
   }
 
   doLogin(users: Users) {
-    this.validEmail(users).subscribe((emailReturned: any) => {
-      if (emailReturned) {
-        console.log(users);
-        this.userAuthenticated = true;
+    this.validEmail(users.email).subscribe((emailReturned: any) => {
+      if (Array.isArray(emailReturned)) {
+        if (emailReturned.length > 0) {
+          console.log(emailReturned.length);
+          this.userAuthenticated = true;
 
-        this.showMenuEmitter.emit(true);
+          this.showMenuEmitter.emit(true);
 
-        this.router.navigate(['/users']);
-      } else 
-      {
-        this.userAuthenticated = false;
-        this.showMenuEmitter.emit(false);
-        this.openToast();
+          this.router.navigate(['/users']);
+        } else {
+          console.log(this.userAuthenticated);
+          this.userAuthenticated = false;
+          this.showMenuEmitter.emit(false);
+          this.openToast();
+        }
       }
     });
   }
@@ -43,8 +48,31 @@ export class AuthService {
   userIsAuthenticated() {
     return this.userAuthenticated;
   }
+  
 
   openToast() {
     this.toastr.error('Login Inválido', 'Atenção!');
   }
+
+  setLoggedUser(userData: any){
+    try {
+      let userDataString = JSON.stringify(userData);
+      localStorage.setItem('loggedUser', userDataString);
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  // Função para recuperar os dados do usuário logado
+  getLoggedUser(){
+    try {
+      let userDataString: any = localStorage.getItem('loggedUser');
+      let userData = JSON.parse(userDataString)
+      return userData;
+    } catch (error) {
+      console.log(error)
+      return null;
+    }
+  }
+
 }

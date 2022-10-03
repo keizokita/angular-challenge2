@@ -1,5 +1,6 @@
 <div class="card mt-3">
   <div class="card-header">
+    <h5>Bem vindo {{userlogged}}</h5>
     <div class="float-left">
       <h4>Lista de Cadastros</h4>
     </div>
@@ -9,13 +10,34 @@
       </button>
     </div>
     <div class="float-none">
-      <a
-        type="button"
-        class="btn btn-primary"
-        [routerLink]="['/users/create']"
-      >
+      <a type="button" class="btn btn-primary" [routerLink]="['/users/create']">
         Cadastrar Usuário
       </a>
+    </div>
+    <br />
+    <div class="input-group mb-3">
+      <form [formGroup]="formSearch" class="input-group mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Buscar Usuário..."
+          aria-label="Recipient's username"
+          aria-describedby="button-addon2"
+          [formControl]="nameSearch"
+        />
+        <button
+          class="btn btn-outline-secondary"
+          type="button"
+          (click)="onSearch()"
+        >
+          Buscar
+        </button>
+      </form>
+    </div>
+    <div class="btn-group" role="group" aria-label="Basic example">
+      <button type="button" class="btn btn-primary" (click)="onFilterActive()">Ativos</button>
+      <button type="button" class="btn btn-primary"(click)="onFilterInactive()">Inativos</button>
+      <button type="button" class="btn btn-primary" (click)="onFilterNothing()">Todos</button>
     </div>
   </div>
   <div id="AlertPlaceholder" class="card-body">
@@ -29,42 +51,45 @@
         </tr>
       </thead>
       <tbody>
-        <tr
-          *ngFor="let user of users"
-        >
-          <td>{{ user.name }}</td>
-          <td>{{ user.email }}</td>
-          <td>{{ user.gender }}</td>
-          <td>{{ user.status }}</td>
+        <tr *ngFor="let user of users">
+          <td>
+            <button
+              type="button"
+              class="list-group-item list-group-item-action"
+              (click)="onEdit(user.id)"
+            >
+              {{ user.name }}
+            </button>
+          </td>
+          <td>
+            <button
+              type="button"
+              class="list-group-item list-group-item-action"
+              (click)="onEdit(user.id)"
+            >
+              {{ user.email }}
+            </button>
+          </td>
+          <td>
+            <button
+              type="button"
+              class="list-group-item list-group-item-action"
+              (click)="onEdit(user.id)"
+            >
+              {{ user.gender }}
+            </button>
+          </td>
+          <td>
+            <button
+              type="button"
+              class="list-group-item list-group-item-action"
+              (click)="onEdit(user.id)"
+            >
+              {{ user.status }}
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>
   </div>
 </div>
-
-<ng-template #deleteModal>
-  <div class="modal-body text-center">
-    <p>Tem certeza que deseja remover esse produto?</p>
-    <button
-      type="button"
-      class="btn btn-default"
-    >
-      Sim
-    </button>
-    <button type="button" class="btn btn-primary">
-      Não
-    </button>
-  </div>
-</ng-template>
-
-<ng-template #vendaModal>
-  <div class="modal-body text-center" #product>
-    <p>Tem certeza que deseja vender esse produto?</p>
-    <button type="button" class="btn btn-default">
-      Sim
-    </button>
-    <button type="button" class="btn btn-primary">
-      Não
-    </button>
-  </div>
-</ng-template>

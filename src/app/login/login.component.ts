@@ -30,7 +30,9 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.authService.doLogin(this.usersPassword);
+    console.log(this.usersPassword);
+    console.log(this.formLogin.getRawValue());
+    this.authService.doLogin(this.formLogin.getRawValue());
   }
 
   verifyValidTouched(campo: any) {

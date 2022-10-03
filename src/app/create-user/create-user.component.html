@@ -1,1 +1,160 @@
-<p>create-user works!</p>
+<div class="container-fluid px-1 py-5 mx-auto">
+  <div class="row d-flex justify-content-center">
+    <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
+      <div class="card">
+        <h5 class="text-center mb-4">Preencha os Campos do Usuário</h5>
+        <form
+          class="form-card"
+          onsubmit="event.preventDefault()"
+          [formGroup]="formCreate"
+        >
+          <div class="row justify-content-between text-left">
+            <div class="form-group col-sm-6 flex-column d-flex">
+              <label for="name" class="form-control-label px-3"
+                >Name<span class="text-danger"> *</span></label
+              >
+              <input
+                type="text"
+                id="name"
+                name="name"
+                formControlName="name"
+                required
+                [value]="name"
+              />
+              <div
+                *ngIf="formCreate.get('name')?.errors?.['required'] && formCreate.get('name')?.touched "
+                class="invalid-feedback d-block"
+              >
+                Nome obrigatório!
+              </div>
+            </div>
+            <div class="form-group col-sm-6 flex-column d-flex">
+              <label for="email" class="form-control-label px-3"
+                >Email<span class="text-danger"> *</span></label
+              >
+              <input
+                type="email"
+                id="email"
+                name="email"
+                formControlName="email"
+                required
+                [value]="email"
+              />
+              <div
+                *ngIf="formCreate.get('email')?.errors?.['required'] && formCreate.get('email')?.touched "
+                class="invalid-feedback d-block"
+              >
+                Email obrigatório!
+              </div>
+            </div>
+          </div>
+
+          <!-- check-box inicio -->
+
+          <div class="row justify-content-between text-left">
+            <div class="form-group col-sm-6 flex-column d-flex">
+              <label for="gender" class="form-control-label px-3"
+                >Gênero<span class="text-danger"> *</span></label
+              >
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="gender"
+                  value="male"
+                  id="male"
+                  formControlName="gender"
+                  required
+                />
+                <label class="form-check-label" for="male"> Masculino </label>
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="gender"
+                  value="female"
+                  id="female"
+                  formControlName="gender"
+                  required
+                />
+                <label class="form-check-label" for="female"> Feminino </label>
+              </div>
+            </div>
+            <div class="form-group col-sm-6 flex-column d-flex">
+              <label for="status" class="form-control-label px-3"
+                >Atividade<span class="text-danger"> *</span></label
+              >
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="status"
+                  value="active"
+                  id="active"
+                  formControlName="status"
+                />
+                <label class="form-check-label" for="active"> Ativo </label>
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="status"
+                  value="inactive"
+                  id="inactive"
+                  formControlName="status"
+                />
+                <label class="form-check-label" for="inactive"> Inativo </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- check-box fim -->
+
+          <div class="row justify-content-between text-left">
+            <div class="form-group col-sm-6">
+              <button
+                type="submit"
+                class="btn btn-primary"
+                (click)="onSubmit()"
+                [disabled]="!formCreate.valid || !formCreate.dirty"
+              >
+                Enviar
+              </button>
+            </div>
+            <div class="form-group col-sm-6">
+              <button
+                type="button"
+                class="btn btn-danger"
+                (click)="onDelete(deleteModal, user)"
+              >
+                Excluir
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #deleteModal>
+  <div class="modal-body text-center">
+    <p>Tem certeza que deseja remover esse usuário?</p>
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="onConfirmDelete(user)"
+    >
+      Sim
+    </button>
+    <button 
+      type="button" 
+      class="btn btn-danger"
+      (click)="onDeclineDelete()"
+    >
+      Não
+    </button>
+  </div>
+</ng-template>
