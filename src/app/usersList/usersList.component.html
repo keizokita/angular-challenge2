@@ -5,7 +5,8 @@
       <h4>Lista de Cadastros</h4>
     </div>
     <div class="float-end">
-      <button type="button" class="btn btn-danger" [routerLink]="['']">
+      <button type="button" class="btn btn-danger" (click)="onLogout()"> 
+        <!-- metodo de esquecer os dados do lcoa storage -->
         Logout
       </button>
     </div>

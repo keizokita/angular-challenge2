@@ -84,4 +84,8 @@ export class UsersComponent implements OnInit {
     console.log('filtradoTodos');
     this.service.list().subscribe((dados) => (this.users = dados));
   }
+
+  onLogout() {
+    localStorage.removeItem('email');
+  }
 }

@@ -1,4 +1,4 @@
-import { Users } from './usersPassword';
+import { UserPassword} from './userPassword';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -25,15 +25,16 @@ export class AuthService {
     return this.http.get<User>(`${this.API}?email=${email}`);
   }
 
-  doLogin(users: Users) {
-    this.validEmail(users.email).subscribe((emailReturned: any) => {
-      if (Array.isArray(emailReturned)) {
-        if (emailReturned.length > 0) {
-          console.log(emailReturned.length);
+  doLogin(users: UserPassword) {
+    this.validEmail(users.email).subscribe((listReturned: any) => {
+      if (Array.isArray(listReturned)) {
+        if (listReturned.length > 0 && users.password !== "123456") {
+          console.log(listReturned.length);
           this.userAuthenticated = true;
-
+          localStorage.setItem('email', users.email);
+          //localStorage.setItem('list', listReturned.id);
+          console.log(listReturned);
           this.showMenuEmitter.emit(true);
-
           this.router.navigate(['/users']);
         } else {
           console.log(this.userAuthenticated);
@@ -48,31 +49,19 @@ export class AuthService {
   userIsAuthenticated() {
     return this.userAuthenticated;
   }
-  
 
   openToast() {
     this.toastr.error('Login Inválido', 'Atenção!');
   }
 
-  setLoggedUser(userData: any){
-    try {
-      let userDataString = JSON.stringify(userData);
-      localStorage.setItem('loggedUser', userDataString);
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
   // Função para recuperar os dados do usuário logado
-  getLoggedUser(){
-    try {
-      let userDataString: any = localStorage.getItem('loggedUser');
-      let userData = JSON.parse(userDataString)
-      return userData;
-    } catch (error) {
-      console.log(error)
-      return null;
+  getLoggedUser() {
+    if (localStorage.getItem('email') !== '') {
+      this.userAuthenticated = true;
     }
   }
 
+  getLoggedName() {
+
+  }
 }

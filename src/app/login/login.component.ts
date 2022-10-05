@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Users } from './usersPassword';
+import { UserPassword } from './userPassword';
 import { AuthService } from './auth.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { AuthService } from './auth.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  usersPassword: Users = new Users();
+  UsersPassword: UserPassword = new UserPassword();
 
   formLogin!: FormGroup;
 
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.usersPassword);
+    console.log(this.UsersPassword);
     console.log(this.formLogin.getRawValue());
     this.authService.doLogin(this.formLogin.getRawValue());
   }
