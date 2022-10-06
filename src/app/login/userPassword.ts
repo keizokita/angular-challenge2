@@ -3,5 +3,4 @@ export class UserPassword {
   name!: string;
   email!: string;
   password!: string;
-  static email: any;
 }

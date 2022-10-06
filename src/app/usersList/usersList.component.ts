@@ -23,8 +23,10 @@ export class UsersComponent implements OnInit {
   filter = new FormControl();
 
   filterUsers: boolean = false;
-  
+
   userlogged: any;
+
+  public nameUser = localStorage.getItem('nameReturned');
 
   constructor(
     private service: UserService,
@@ -86,6 +88,6 @@ export class UsersComponent implements OnInit {
   }
 
   onLogout() {
-    localStorage.removeItem('email');
+    localStorage.clear();
   }
 }

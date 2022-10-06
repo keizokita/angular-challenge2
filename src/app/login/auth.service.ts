@@ -28,12 +28,15 @@ export class AuthService {
   doLogin(users: UserPassword) {
     this.validEmail(users.email).subscribe((listReturned: any) => {
       if (Array.isArray(listReturned)) {
-        if (listReturned.length > 0 && users.password !== "123456") {
+        if (listReturned.length > 0 && users.password === "123456") {
           console.log(listReturned.length);
           this.userAuthenticated = true;
           localStorage.setItem('email', users.email);
-          //localStorage.setItem('list', listReturned.id);
+          localStorage.setItem('nameReturned', listReturned[0].name)
+          localStorage.getItem('nameReturned')
+          var nameUser = localStorage.getItem('nameReturned');
           console.log(listReturned);
+          console.log(listReturned[0].name);
           this.showMenuEmitter.emit(true);
           this.router.navigate(['/users']);
         } else {

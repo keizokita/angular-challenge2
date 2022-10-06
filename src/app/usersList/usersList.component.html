@@ -1,11 +1,11 @@
 <div class="card mt-3">
   <div class="card-header">
-    <h5>Bem vindo </h5>{{userlogged}}
+    <h5>Bem vindo {{nameUser}}</h5>
     <div class="float-left">
       <h4>Lista de Cadastros</h4>
     </div>
     <div class="float-end">
-      <button type="button" class="btn btn-danger" (click)="onLogout()"> 
+      <button type="button" class="btn btn-danger" [routerLink]="['']" (click)="onLogout()"> 
         <!-- metodo de esquecer os dados do lcoa storage -->
         Logout
       </button>
