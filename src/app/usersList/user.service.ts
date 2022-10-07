@@ -1,5 +1,5 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from './users.model';
 
 @Injectable({
@@ -17,10 +17,6 @@ export class UserService {
   loadByID(id: any) {
     return this.http.get<User>(`${this.API}/${id}`);
   }
-
-  // loadByName(name: any) {
-  //   return this.http.get<User>(`${this.API}?name=${name}`);
-  // }
 
   create(users: any) {
     return this.http.post(this.API, users).subscribe();

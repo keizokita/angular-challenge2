@@ -1,33 +1,32 @@
+import { Location } from '@angular/common';
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Route, Router } from '@angular/router';
-import { UserService } from '../usersList/user.service';
-import { Location } from '@angular/common';
-import { User } from '../usersList/users.model';
-import { ToastrService } from 'ngx-toastr';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { ToastrService } from 'ngx-toastr';
+import { UserService } from '../usersList/user.service';
+import { User } from '../usersList/users.model';
 
 @Component({
   selector: 'app-create-user',
   templateUrl: './create-user.component.html',
-  styleUrls: ['./create-user.component.scss']
+  styleUrls: ['./create-user.component.scss'],
 })
 export class CreateUserComponent implements OnInit {
+  formCreate!: FormGroup;
 
-formCreate!: FormGroup;
+  deleteModalRef!: BsModalRef;
 
-deleteModalRef!: BsModalRef;
+  userSelected!: User;
 
-userSelected!: User;
+  submitted = false;
 
-submitted = false;
+  user?: User[];
 
-user?: User[];
-
-name = '';
-email = '';
-gender = '';
-status = '';
+  name = '';
+  email = '';
+  gender = '';
+  status = '';
 
   constructor(
     private fb: FormBuilder,
@@ -37,15 +36,15 @@ status = '';
     private router: Router,
     private modalService: BsModalService,
     private toastr: ToastrService
-    ) { }
+  ) {}
 
   ngOnInit(): void {
     this.formCreate = this.fb.group({
       id: [null],
       name: ['', [Validators.required]],
-      email: ['',[Validators.email]],
-      gender: ['',[Validators.required]],
-      status: ['',[Validators.required]],
+      email: ['', [Validators.email]],
+      gender: ['', [Validators.required]],
+      status: ['', [Validators.required]],
     });
 
     this.route.params.subscribe((params: any) => {
@@ -58,15 +57,15 @@ status = '';
     });
   }
 
-  verifyValidTouched(campo: any){
+  verifyValidTouched(campo: any) {
     return !campo.valid && campo.touched;
   }
 
-  aplyCssError(campo: any){
+  aplyCssError(campo: any) {
     return {
       'is-invalid': this.verifyValidTouched(campo),
-      'has-feedback': this.verifyValidTouched(campo)
-    }
+      'has-feedback': this.verifyValidTouched(campo),
+    };
   }
 
   onSubmit() {
@@ -100,5 +99,4 @@ status = '';
   onDeclineDelete() {
     this.deleteModalRef.hide();
   }
-
 }

@@ -1,9 +1,9 @@
-import { UserPassword} from './userPassword';
+import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { User } from '../usersList/users.model';
 import { ToastrService } from 'ngx-toastr';
+import { User } from '../usersList/users.model';
+import { UserPassword } from './userPassword';
 
 @Injectable({
   providedIn: 'root',
@@ -28,12 +28,12 @@ export class AuthService {
   doLogin(users: UserPassword) {
     this.validEmail(users.email).subscribe((listReturned: any) => {
       if (Array.isArray(listReturned)) {
-        if (listReturned.length > 0 && users.password === "123456") {
+        if (listReturned.length > 0 && users.password === '123456') {
           console.log(listReturned.length);
           this.userAuthenticated = true;
           localStorage.setItem('email', users.email);
-          localStorage.setItem('nameReturned', listReturned[0].name)
-          localStorage.getItem('nameReturned')
+          localStorage.setItem('nameReturned', listReturned[0].name);
+          localStorage.getItem('nameReturned');
           var nameUser = localStorage.getItem('nameReturned');
           console.log(listReturned);
           console.log(listReturned[0].name);
@@ -62,9 +62,5 @@ export class AuthService {
     if (localStorage.getItem('email') !== '') {
       this.userAuthenticated = true;
     }
-  }
-
-  getLoggedName() {
-
   }
 }

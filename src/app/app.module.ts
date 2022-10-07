@@ -2,18 +2,17 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { BsModalService } from 'ngx-bootstrap/modal';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { UsersComponent } from './usersList/usersList.component';
 import { CreateUserComponent } from './create-user/create-user.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AuthService } from './login/auth.service';
 import { AuthGuard } from './guards/auth.guard';
-import { RouterModule } from '@angular/router';
+import { AuthService } from './login/auth.service';
+import { LoginComponent } from './login/login.component';
 import { TokenInterceptorService } from './token-interceptor.service';
-import { BsModalService } from 'ngx-bootstrap/modal';
-
+import { UsersComponent } from './usersList/usersList.component';
 
 @NgModule({
   declarations: [
@@ -28,15 +27,18 @@ import { BsModalService } from 'ngx-bootstrap/modal';
     HttpClientModule,
     ReactiveFormsModule,
     RouterModule,
-    FormsModule
+    FormsModule,
   ],
-  providers: [AuthService, AuthGuard, BsModalService,
-  {
-    provide: HTTP_INTERCEPTORS,
-    useClass: TokenInterceptorService,
-    multi: true
-  }
+  providers: [
+    AuthService,
+    AuthGuard,
+    BsModalService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true,
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

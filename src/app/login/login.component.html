@@ -5,7 +5,6 @@
 />
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
 
 <div class="wrapper fadeInDown">
   <div id="formContent">
@@ -32,7 +31,9 @@
         Email Obrigatório!
       </div>
       <div
-        *ngIf="formLogin.get('email')?.errors && formLogin.get('email')?.touched"
+        *ngIf="
+          formLogin.get('email')?.errors && formLogin.get('email')?.touched
+        "
         class="invalid-feedback d-block"
       >
         Email Inválido!
@@ -54,12 +55,22 @@
         Senha Inválida!
       </div>
       <div
-        *ngIf="formLogin.get('password')?.errors && formLogin.get('password')?.touched"
+        *ngIf="
+          formLogin.get('password')?.errors &&
+          formLogin.get('password')?.touched
+        "
         class="invalid-feedback d-block"
       >
         A senha deve conter no mínimo 6 caracteres!
       </div>
-      <button type="submit" class="btn btn-info" id="onSubmit" [disabled]="!formLogin.valid" >Log In</button>
+      <button
+        type="submit"
+        class="btn btn-info"
+        id="onSubmit"
+        [disabled]="!formLogin.valid"
+      >
+        Log In
+      </button>
     </form>
   </div>
 </div>
